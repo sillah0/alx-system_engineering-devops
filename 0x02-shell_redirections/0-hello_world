@@ -1,2 +1,2 @@
 #!/bin/bash
-print("hello world") /n > hello_world.txt
+echo "hello world"
