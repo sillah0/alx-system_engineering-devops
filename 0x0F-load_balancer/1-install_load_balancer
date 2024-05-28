@@ -15,7 +15,7 @@ frontend  ashtefonts.tech_frontend
         bind *:80
         mode http
         default_backend ashtefonts.tech_backend
-backend astrafort.tech_backend
+backend ashtefonts.tech_backend
         balance roundrobin
         server 438626-web-01 52.204.74.122:80 check
         server 438626-web-02 35.153.51.106:80 check
