@@ -5,7 +5,7 @@ import requests
 import sys
 import csv
 
-URL = 'https://jsonplaceholder.typicode.com/todos/1'
+URL = 'https://jsonplaceholder.typicode.com'
 """API url"""
 
 if __name__ == '__main__':

@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""a script that returns info about employee's TODO list progress"""
+"""a Python script that returns information about their TODO list progress."""
 import re
 import requests
 import sys
 
-URL = 'https://jsonplaceholder.typicode.com/todos/1'
-"""API url"""
+URL = 'https://jsonplaceholder.typicode.com'
+"""The API's URL."""
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -25,4 +25,3 @@ if __name__ == '__main__':
             )
             for todo_done in done_todos:
                 print('\t {}'.format(todo_done.get('title')))
-            
