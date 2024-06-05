@@ -12,17 +12,9 @@ if __name__ == "__main__":
     username = user.get("username")
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    """Exporting data to json"""
-    filename = f"{user_id}.json"
-    data = {
-        user_id: [
-            {
-                "username": username,
-                "task": todo.get('title'),
-                "completed": todo.get('completed')
-            }
-            for todo in todos
-        ]
-    }
-    with open(filename, 'w') as jsonfile:
-        json.dump(data, jsonfile)
+    with open("{}.json".format(user_id), 'w') as jsonfile:
+        json.dump({user_id: [{
+            "task": task.get('title'),
+            "completed": task.get('completed'),
+            "username": username
+        }for task in todos]}, jsonfile)
