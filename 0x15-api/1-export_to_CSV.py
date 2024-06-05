@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-"""a script that returns info about employee's TODO list progress"""
-import re
+"""a script that extends your Python script to export data in the CSV format"""
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
@@ -12,17 +11,8 @@ if __name__ == "__main__":
     username = user.get("username")
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-"""Export data in the CSV format"""
-filename = f"{user_id}.csv"
-with open(filename, 'w', newline='') as csvfile:
-    fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for todo in todos:
-        writer.writerow({
-            'USER_ID': user_id,
-            'USERNAME': username,
-            'TASK_COMPLETED_STATUS': todo.get('completed'),
-            'TASK_TITLE': todo.get('title')
-        })
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        [writer.writerow(
+            [user_id, username, task.get("completed"), task.get("title")]
+         ) for task in todos]
