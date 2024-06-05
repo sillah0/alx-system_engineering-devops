@@ -3,6 +3,7 @@
 import re
 import requests
 import sys
+import csv
 
 URL = 'https://jsonplaceholder.typicode.com/todos/1'
 """API url"""
@@ -25,4 +26,18 @@ if __name__ == '__main__':
             )
             for todo_done in done_todos:
                 print('\t {}'.format(todo_done.get('title')))
-            
+
+"""Export data in the CSV format"""
+filename = f"{id}.csv"
+with open(filename, 'w', newline='') as csvfile:
+    fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for todo in todos:
+        writer.writerow({
+            'USER_ID': id,
+            'USERNAME': user_name,
+            'TASK_COMPLETED_STATUS': todo.get('completed'),
+            'TASK_TITLE': todo.get('title')
+        })
